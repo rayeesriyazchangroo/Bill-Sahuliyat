@@ -14,7 +14,7 @@ export default class extends Controller {
             return
         }
 
-        // Build URL with page parameter if it exists
+        // Build URL with page parameter if it exists 
         let url = this.urlValue
         const currentPage = this.element.dataset.page
         if (currentPage) {
