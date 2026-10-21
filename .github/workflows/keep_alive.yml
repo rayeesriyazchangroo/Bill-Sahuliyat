@@ -2,9 +2,12 @@ name: Keep Render App Awake
 
 on:
   schedule:
-    # Triggers every 12 minutes to keep Render web service continuously awake
-    - cron: '*/12 * * * *'
+    # Triggers every 10 minutes to keep Render web service continuously awake
+    - cron: '*/10 * * * *'
   workflow_dispatch: # Allows manual trigger from GitHub UI
+
+permissions:
+  contents: read
 
 jobs:
   ping:
@@ -20,3 +23,9 @@ jobs:
           echo "Pinging: $APP_URL"
           RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" "$APP_URL")
           echo "HTTP Response Status: $RESPONSE"
+          if [ "$RESPONSE" -ne 200 ]; then
+            echo "❌ Health check failed with status: $RESPONSE"
+            exit 1
+          else
+            echo "✅ Health check passed"
+          fi

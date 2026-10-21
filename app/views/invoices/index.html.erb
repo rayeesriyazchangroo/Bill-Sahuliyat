@@ -68,11 +68,12 @@
       <%# Mobile Card Layout %>
       <div class="md:hidden divide-y divide-gray-50">
         <% @invoices.each_with_index do |invoice, index| %>
-          <div id="<%= dom_id(invoice, :mobile) %>" 
+          <div id="<%= dom_id(invoice, :mobile) %>"
                class="p-6 active:bg-gray-50/80 transition relative group animate-pop-in"
                style="animation-delay: <%= index * 0.05 %>s"
-               data-controller="row-click" 
+               data-controller="row-click"
                data-row-click-url-value="<%= invoice_path(invoice) %>"
+               data-page="<%= params[:page] %>"
                data-action="click->row-click#go">
             <div class="flex justify-between items-start mb-4">
               <div class="flex flex-col">
@@ -123,9 +124,10 @@
           <tbody class="divide-y divide-gray-100">
             <% @invoices.each do |invoice| %>
               <tr id="<%= dom_id(invoice) %>"
-                  class="hover:bg-brand-50/30 transition group cursor-pointer" 
-                  data-controller="row-click" 
+                  class="hover:bg-brand-50/30 transition group cursor-pointer"
+                  data-controller="row-click"
                   data-row-click-url-value="<%= invoice_path(invoice) %>"
+                  data-page="<%= params[:page] %>"
                   data-action="click->row-click#go">
                 <td class="px-8 py-6">
                   <span class="inline-flex items-center px-3 py-1 bg-brand-50 text-brand-700 text-xs font-black rounded-lg group-hover:bg-brand-600 group-hover:text-white transition uppercase">

@@ -14,11 +14,19 @@ export default class extends Controller {
             return
         }
 
+        // Build URL with page parameter if it exists
+        let url = this.urlValue
+        const currentPage = this.element.dataset.page
+        if (currentPage) {
+            const separator = url.includes('?') ? '&' : '?'
+            url = `${url}${separator}page=${currentPage}`
+        }
+
         // Use Turbo to visit the URL if available, otherwise fallback to window.location
         if (window.Turbo) {
-            window.Turbo.visit(this.urlValue)
+            window.Turbo.visit(url)
         } else {
-            window.location.href = this.urlValue
+            window.location.href = url
         }
     }
 }
