@@ -5,7 +5,7 @@ export default class extends Controller {
     static values = { url: String }
 
     go(event) {
-        // If the user clicked a link, button, form, or any interactive input, don't navigate the row
+        // If the user clicked a link, button, form, or any interactive input, don't navigate the row 
         if (event.target.closest('a') ||
             event.target.closest('button') ||
             event.target.closest('form') ||
